@@ -26,7 +26,7 @@ long long highest_between_12(const long long highest, const long long new_number
     long long current_highest = highest;
     long long temp;
     for (int i = 0; i < batteries; i++) {
-        temp = (highest / pow_table[batteries - i] * pow_table[batteries - i - 1] + highest % pow_table[batteries - i - 1]) * 10 + new_number;
+        temp = ((highest - highest % pow_table[batteries - i]) / 10 + highest % pow_table[batteries - i - 1]) * 10 + new_number;
         if (temp > current_highest) current_highest = temp;
     }
     return current_highest;
