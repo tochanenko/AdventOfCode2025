@@ -2,6 +2,7 @@
 // Created by Vladyslav Tochanenko on 01.12.2025.
 //
 
+#include <algorithm>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -11,17 +12,15 @@
 
 using namespace std;
 
-vector<long long> generate_halfs(int decimals) {
+vector<long long> generate_halfs(int length) {
     vector<long long> numbers;
-
-    long long start = static_cast<long long>(pow(10, decimals - 1));
-    long long end = static_cast<long long>(pow(10, decimals)) - 1;
+    long long start = static_cast<long long>(pow(10, length - 1));
+    long long end = static_cast<long long>(pow(10, length)) - 1;
     numbers.reserve(end - start + 1);
 
     for (long long i = start; i <= end; ++i) {
         numbers.push_back(i);
     }
-
     return numbers;
 }
 
@@ -30,14 +29,25 @@ vector<long long> generate_numbers(int decimals) {
 
     for (int i = 1; i <= decimals; ++i) {
         vector<long long> base_numbers = generate_halfs(i);
-
         long long multiplier = static_cast<long long>(pow(10, i));
 
-        for (long long num : base_numbers) {
-            long long new_num = (num * multiplier) + num;
-            numbers.push_back(new_num);
+        for (long long base : base_numbers) {
+            long long current_num = base;
+
+            while (true) {
+                if (current_num > (LLONG_MAX - base) / multiplier) {
+                    break;
+                }
+
+                current_num = (current_num * multiplier) + base;
+                numbers.push_back(current_num);
+            }
         }
     }
+
+    sort(numbers.begin(), numbers.end());
+    auto last = std::unique(numbers.begin(), numbers.end());
+    numbers.erase(last, numbers.end());
 
     return numbers;
 }
