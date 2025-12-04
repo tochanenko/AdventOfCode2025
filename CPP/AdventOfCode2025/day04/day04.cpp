@@ -11,8 +11,6 @@
 
 using namespace std;
 
-
-
 int count_rolls(string* map, int size) {
     int res = 0;
     for (int i = 1; i < size - 1; i++) {
@@ -35,18 +33,20 @@ int main() {
     string path = "../day04/input.txt";
     vector<string> lines = readLines(path);
 
+    if (lines.empty()) return 1;
+
     const int size = lines.size() + 2;
-
     auto* map = new string[size];
+    string border(size + 2, '.');
+    map[0] = border;
+    map[size - 1] = border;
 
-    for (int i = 1; i < size; i++) {
-        map[i] = "." + lines[i - 1] + ".";
-    }
-    for (int i = 0; i < size; i++) {
-        map[0][i] = map[size - 1][i] = '.';
+    for (int i = 0; i < lines.size(); i++) {
+        map[i + 1] = "." + lines[i] + ".";
     }
 
     cout << count_rolls(map, size) << endl;
 
+    delete[] map;
     return 0;
 }
