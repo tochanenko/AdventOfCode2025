@@ -37,10 +37,6 @@ void init_freezer(vector<string>& lines) {
     sort(products.begin(), products.end());
 }
 
-bool ranges_intersect(pair<long long, long long> first, pair<long long, long long> second) {
-    return first.second >= second.first;
-}
-
 void squash_good_products() {
     vector<pair<long long, long long>> merged_ranges;
     merged_ranges.push_back(good_products[0]);
