@@ -34,7 +34,7 @@ vector<long long> convert_vector_to_ll(const vector<string>& input) {
 }
 
 int main() {
-    const string path = "../day06/test.txt";
+    const string path = "../day06/input.txt";
     const vector<string> lines = readLines(path);
     const int NUMBERS = lines.size() - 1;
 
@@ -63,8 +63,6 @@ int main() {
     }
 
     cout << res << endl;
-
-    cout << "Hello World!" << endl;
 
     return 0;
 }
