@@ -24,3 +24,6 @@ add_executable(day04 day04/day04.cpp
 add_executable(day05 day05/day05.cpp
         utils/utils.cpp
         utils/utils.h)
+add_executable(day06 day06/day06.cpp
+        utils/utils.cpp
+        utils/utils.h)
